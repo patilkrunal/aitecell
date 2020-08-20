@@ -29,7 +29,7 @@ SECRET_KEY = 'l%%cf6s5-8n6xodxpa_w8oh#qlpx3i#806feg5p337e9pjda!9'
 DEBUG = True
 # DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'aitecell.herokuapp.com']
 # ALLOWED_HOSTS = ['herokuapp.com', 'http://127.0.0.1', ]
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
