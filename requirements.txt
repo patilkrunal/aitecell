@@ -37,7 +37,7 @@ social-auth-app-django==2.1.0
 social-auth-core==1.7.0
 sqlparse==0.3.1
 Unidecode==1.1.1
-urllib3==1.22
+urllib3==1.24.2
 virtualenv==16.7.9
 virtualenv-clone==0.5.4
 virtualenvwrapper-win==1.2.5
