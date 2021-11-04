@@ -1,7 +1,17 @@
 from django.contrib import admin
-from .models import EventType, Event, Update, Documents, Videos, \
-    Startup_Initiative, Category, People, Links, \
-    Internships, Collaboration
+from .models import (
+    EventType,
+    Event,
+    Update,
+    Documents,
+    Videos,
+    Startup_Initiative,
+    Category,
+    People,
+    Links,
+    Internships,
+    Collaboration,
+)
 
 
 admin.site.register(EventType)

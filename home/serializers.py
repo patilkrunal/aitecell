@@ -1,21 +1,33 @@
 from abc import ABC
 
 from rest_framework import serializers
-from .models import EventType, Event, Update, Documents, Videos, \
-    Startup_Initiative, Category, People, Links, \
-    Internships, Collaboration
-
-
-class EventTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EventType
-        fields = ["__all__"]
+from .models import (
+    EventType,
+    Event,
+    Update,
+    Documents,
+    Videos,
+    Startup_Initiative,
+    Category,
+    People,
+    Links,
+    Internships,
+    Collaboration,
+)
 
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ["__all__"]
+        fields = "__all__"
+
+
+class EventTypeSerializer(serializers.ModelSerializer):
+    events = EventSerializer(many=True)
+
+    class Meta:
+        model = EventType
+        fields = "__all__"
 
 
 class UpdateSerializer(serializers.ModelSerializer):
@@ -70,4 +82,3 @@ class CollaborationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collaboration
         fields = "__all__"
-
