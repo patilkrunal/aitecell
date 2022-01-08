@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator
+import datetime
 
 
 class EventType(models.Model):
@@ -82,6 +84,12 @@ class Category(models.Model):
         return self.title
 
 
+def max_value_current_year(value):
+    return MaxValueValidator(current_year())(value)
+
+def current_year():
+    return datetime.date.today().year
+
 class People(models.Model):
     name = models.CharField(max_length=100)
     designation = models.CharField(max_length=200, blank=True)
@@ -89,8 +97,8 @@ class People(models.Model):
     description = models.TextField(blank=True)
     social_links = models.TextField(blank=True)
     category = models.ManyToManyField(Category, blank=True)
-    start_date = models.DateField(blank=True, null=True)
-    end_date = models.DateField(blank=True, null=True)
+    passout_year = models.PositiveIntegerField(
+        default=current_year(), validators=[MinValueValidator(1984), max_value_current_year])
 
     def __str__(self):
         return self.name
