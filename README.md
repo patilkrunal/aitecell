@@ -7,17 +7,25 @@
     "api": "https://aitecell.herokuapp.com/api/",
     "eventtypes": "https://aitecell.herokuapp.com/api/eventtypes/?format=json",
     "events": "https://aitecell.herokuapp.com/api/events/?format=json",
+    "events/upcoming_events": "http://127.0.0.1:8000/api/events/upcoming_events/?format=json",
+    "events/live_events": "http://127.0.0.1:8000/api/events/live_events/?format=json",
+    "events/past_events": "http://127.0.0.1:8000/api/events/past_events/?format=json",
     "latestupdates": "https://aitecell.herokuapp.com/api/latestupdates/?format=json",
     "documents": "https://aitecell.herokuapp.com/api/documents/?format=json",
     "videos": "https://aitecell.herokuapp.com/api/videos/?format=json",
     "startups": "https://aitecell.herokuapp.com/api/startups/?format=json",
     "categories": "https://aitecell.herokuapp.com/api/categories/?format=json",
     "people": "https://aitecell.herokuapp.com/api/people/?format=json",
+    "people/alumni_entrepreneur": "http://127.0.0.1:8000/api/people/alumni_entrepreneur/?format=json",
+    "people/ecell_faculty": "http://127.0.0.1:8000/api/people/ecell_faculty/?format=json",
+    "people/ecell_team": "http://127.0.0.1:8000/api/people/ecell_team/?format=json",
+    "people/is_active": "http://127.0.0.1:8000/api/people/is_active/?format=json",
     "links": "https://aitecell.herokuapp.com/api/links/?format=json",
     "internships": "https://aitecell.herokuapp.com/api/internships/?format=json",
-    "collaboration": "https://aitecell.herokuapp.com/api/collaboration/?format=json"
-    
+    "internships/is_active": "http://127.0.0.1:8000/api/internships/is_active//?format=json",
+    "collaboration": "https://aitecell.herokuapp.com/api/collaboration/?format=json",
 </details>
+
 
 <details>
 <summary>Admin panel: <code>https://aitecell.herokuapp.com/admin</code></summary>
