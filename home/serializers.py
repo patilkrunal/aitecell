@@ -17,6 +17,7 @@ from .models import (
 
 
 class EventSerializer(serializers.ModelSerializer):
+    event_type = serializers.CharField(source='event_type.title')
     class Meta:
         model = Event
         fields = "__all__"
@@ -61,6 +62,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class PeopleSerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = People
         fields = "__all__"

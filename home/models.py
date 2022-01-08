@@ -12,8 +12,8 @@ class EventType(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    date_from = models.DateTimeField(blank=True, null=True)
-    date_to = models.DateTimeField(blank=True, null=True)
+    start_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
     image_url = models.URLField(blank=True)
     meet_url = models.URLField(blank=True)
     event_type = models.ForeignKey(
@@ -29,8 +29,8 @@ class Event(models.Model):
 
 class Update(models.Model):
     title = models.CharField(max_length=100)
-    date_from = models.DateTimeField(default=timezone.now)
-    date_to = models.DateTimeField(blank=True, null=True)
+    start_date = models.DateTimeField(default=timezone.now)
+    end_date = models.DateTimeField(blank=True, null=True)
     link = models.URLField(blank=True)
 
     def __str__(self):
@@ -45,6 +45,9 @@ class Documents(models.Model):
     description = models.TextField(blank=True)
     document_link = models.URLField(blank=True)
     image = models.ImageField(upload_to="media/documents/", blank=True)
+
+    class Meta:
+        verbose_name_plural = "Documents"
 
     def __str__(self):
         return self.title
@@ -72,6 +75,9 @@ class Startup_Initiative(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return self.title
 
@@ -83,6 +89,8 @@ class People(models.Model):
     description = models.TextField(blank=True)
     social_links = models.TextField(blank=True)
     category = models.ManyToManyField(Category, blank=True)
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -93,6 +101,9 @@ class Links(models.Model):
     link = models.URLField()
     description = models.TextField(blank=True)
     logo_url = models.URLField(blank=True)
+
+    class Meta:
+        verbose_name_plural = "Links"
 
     def __str__(self):
         return self.title
@@ -105,6 +116,9 @@ class Internships(models.Model):
     image = models.ImageField(upload_to="media/internships/", blank=True)
     apply_link = models.URLField(blank=True)
     deadline = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = "Internships"
 
     def __str__(self):
         return self.title
