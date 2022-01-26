@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from ckeditor.fields import RichTextField
 import datetime
 
 
@@ -44,7 +45,7 @@ class Update(models.Model):
 
 class Documents(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
+    description = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
     document_link = models.URLField(blank=True)
     image = models.ImageField(upload_to="media/documents/", blank=True)
 
@@ -87,8 +88,10 @@ class Category(models.Model):
 def max_value_current_year(value):
     return MaxValueValidator(current_year())(value)
 
+
 def current_year():
     return datetime.date.today().year
+
 
 class People(models.Model):
     name = models.CharField(max_length=100)
@@ -98,7 +101,9 @@ class People(models.Model):
     social_links = models.TextField(blank=True)
     category = models.ManyToManyField(Category, blank=True)
     passout_year = models.PositiveIntegerField(
-        default=current_year(), validators=[MinValueValidator(1984), max_value_current_year])
+        default=current_year(),
+        validators=[MinValueValidator(1984), max_value_current_year],
+    )
 
     def __str__(self):
         return self.name
@@ -120,7 +125,7 @@ class Links(models.Model):
 class Internships(models.Model):
     title = models.CharField(max_length=100)
     company_link = models.URLField(blank=True)
-    description = models.TextField(blank=True)
+    description = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
     image = models.ImageField(upload_to="media/internships/", blank=True)
     apply_link = models.URLField(blank=True)
     deadline = models.DateTimeField(blank=True, null=True)
