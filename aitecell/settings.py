@@ -74,7 +74,7 @@ WSGI_APPLICATION = "aitecell.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(default=config("DATABASE_URL"))}
+DATABASES = {"default": dj_database_url.config(default=os.getenv("POSTGRES_URI"))}
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES["default"].update(db_from_env)
