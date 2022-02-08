@@ -154,19 +154,23 @@ class PeopleViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=["get"])
     def ecell_team(self, request, *args, **kwargs):
         ecell_team = People.objects.filter(
-            Q(category__title__startswith='Team')
+            (Q(category__title__startswith='Team') |
+            Q(category__title__startswith='Faculty')) &
+            (Q(passout_year__gte=datetime.date.today().year))
         )
 
         serializer = self.get_serializer(ecell_team, many=True)
         return Response(serializer.data)
-    
+
     @action(detail=False, methods=["get"])
-    def ecell_faculty(self, request, *args, **kwargs):
-        ecell_faculty = People.objects.filter(
-            Q(category__title__startswith='Faculty')
+    def ecell_team_alumni(self, request, *args, **kwargs):
+        ecell_team = People.objects.filter(
+            (Q(category__title__startswith='Team') |
+            Q(category__title__startswith='Faculty')) &
+            (Q(passout_year__lt=datetime.date.today().year))
         )
 
-        serializer = self.get_serializer(ecell_faculty, many=True)
+        serializer = self.get_serializer(ecell_team, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=["get"])
@@ -176,16 +180,6 @@ class PeopleViewSet(viewsets.ModelViewSet):
         )
 
         serializer = self.get_serializer(alumni_entrepreneur, many=True)
-        return Response(serializer.data)
-
-    @action(detail=False, methods=["get"])
-    def is_active(self, request, *args, **kwargs):
-        is_active = People.objects.filter(
-            Q(start_date__lte=datetime.date.today(),
-            end_date__gte=datetime.date.today())
-        ).order_by('-start_date')
-
-        serializer = self.get_serializer(is_active, many=True)
         return Response(serializer.data)
 
 
