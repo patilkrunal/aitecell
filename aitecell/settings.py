@@ -18,10 +18,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+DATABASE_URL = "postgres://frdrbbqogpkvdn:0ad62bb162af67bd7c9c63ebb469ff73f4338a66add75cf648750df48ee2488b@ec2-23-20-168-40.compute-1.amazonaws.com:5432/dena2t91j4cj5n"
 SECRET_KEY = os.getenv("SECRET_KEY", "secret")
 DEBUG = True
-ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost", "gitkp.pythonanywhere.com"]
+ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost", "aitecell.herokuapp.com"]
 
 
 INSTALLED_APPS = [
@@ -74,16 +74,11 @@ WSGI_APPLICATION = "aitecell.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("POSTGRES_DB_NAME"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": os.getenv("POSTGRES_HOST"),
-        "PORT": os.getenv("POSTGRES_PORT"),
-    }
-}
+DATABASES = {"default": dj_database_url.config(default=config("DATABASE_URL"))}
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES["default"].update(db_from_env)
+
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
