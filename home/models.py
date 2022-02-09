@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
 import datetime
 
@@ -78,15 +79,12 @@ class Startup_Initiative(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=100)
 
-    class Meta:
-        verbose_name_plural = "Categories"
-
     def __str__(self):
         return self.title
 
 
 def max_value_current_year(value):
-    return MaxValueValidator(current_year())(value)
+    return MaxValueValidator(current_year())(value) + 3
 
 
 def current_year():
@@ -100,9 +98,12 @@ class People(models.Model):
     description = models.TextField(blank=True)
     social_links = models.TextField(blank=True)
     category = models.ManyToManyField(Category, blank=True)
-    passout_year = models.PositiveIntegerField(
-        default=current_year(),
-        validators=[MinValueValidator(1984), max_value_current_year],
+    is_active = models.BooleanField(default=True)
+    batch = models.PositiveIntegerField(
+        _("year"),
+        validators=[MinValueValidator(1950), max_value_current_year],
+        blank=True,
+        null=True,
     )
 
     def __str__(self):
