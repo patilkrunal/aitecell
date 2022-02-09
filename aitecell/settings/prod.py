@@ -10,14 +10,12 @@ load_dotenv()
 DEBUG = False
 print("DEBUG", DEBUG)
 
-ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost", "aitecell.herokuapp.com"']
+ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost", "aitecell.herokuapp.com"]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": dj_database_url.config(default=os.getenv("POSTGRES_URI"))
-}
+DATABASES = {"default": dj_database_url.config(default=os.getenv("POSTGRES_URI"))}
 
 CORS_ORIGIN_ALLOW_ALL = True
 
