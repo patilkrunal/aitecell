@@ -7,7 +7,7 @@ from .base import *
 
 load_dotenv()
 
-DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = True
 print("DEBUG", DEBUG)
 
 ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost", "aitecell.herokuapp.com"]
