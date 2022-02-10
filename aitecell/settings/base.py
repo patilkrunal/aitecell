@@ -1,6 +1,7 @@
-from pathlib import Path
 import os
+import dj_database_url
 from dotenv import load_dotenv
+from pathlib import Path
 
 load_dotenv()
 
@@ -8,6 +9,9 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "secret")
+DEBUG = True
+
+ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost", "aitecell.herokuapp.com"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -40,6 +44,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "aitecell.urls"
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
+}
 
 TEMPLATES = [
     {
@@ -114,3 +125,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 APPEND_SLASH = False
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:3000",
+    "https://aitecell.netlify.app",
+)
