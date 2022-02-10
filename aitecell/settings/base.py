@@ -45,7 +45,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "aitecell.urls"
 
-DATABASES = {"default": os.getenv("DATABASE_URL")}
+DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
 
 TEMPLATES = [
     {
