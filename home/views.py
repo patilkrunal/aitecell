@@ -8,26 +8,20 @@ from rest_framework.decorators import action
 import datetime
 
 from .models import (
-    EventType,
     Event,
     Update,
-    Documents,
     Videos,
     Startup_Initiative,
-    Category,
     People,
     Links,
     Internships,
     Collaboration,
 )
 from .serializers import (
-    EventTypeSerializer,
     EventSerializer,
     UpdateSerializer,
-    DocumentsSerializer,
     VideosSerializer,
     StartupInitiativeSerializer,
-    CategorySerializer,
     PeopleSerializer,
     LinksSerializer,
     InternshipsSerializer,
@@ -39,16 +33,6 @@ def home(request):
     template = loader.get_template("home/index.html")
     context = {}
     return HttpResponse(template.render(context, request))
-
-
-class EventTypeViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows EventType to be created, viewed or modified
-    """
-
-    queryset = EventType.objects.all()
-    serializer_class = EventTypeSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -102,16 +86,6 @@ class UpdateViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class DocumentsViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows Experiences to be created, viewed or modified.
-    """
-
-    queryset = Documents.objects.all()
-    serializer_class = DocumentsSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
 class VideosViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Education to be created, viewed or modified.
@@ -129,16 +103,6 @@ class StartupInitiativeViewSet(viewsets.ModelViewSet):
 
     queryset = Startup_Initiative.objects.all()
     serializer_class = StartupInitiativeSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
-class CategoryViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows Links to be created, viewed or modified.
-    """
-
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 

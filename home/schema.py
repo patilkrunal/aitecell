@@ -2,13 +2,12 @@ import graphene
 from graphene_django import DjangoObjectType
 
 from .models import (
-    EventType,
+    AllSections,
+    Tag,
     Event,
     Update,
-    Documents,
     Videos,
     Startup_Initiative,
-    Category,
     People,
     Links,
     Internships,
@@ -16,9 +15,9 @@ from .models import (
 )
 
 
-class EventTypeObjectType(DjangoObjectType):
+class AllSectionsType(DjangoObjectType):
     class Meta:
-        model = EventType
+        model = AllSections
         fields = "__all__"
 
 
@@ -34,12 +33,6 @@ class UpdateType(DjangoObjectType):
         fields = "__all__"
 
 
-class DocumentsType(DjangoObjectType):
-    class Meta:
-        model = Documents
-        fields = "__all__"
-
-
 class VideosType(DjangoObjectType):
     class Meta:
         model = Videos
@@ -52,9 +45,9 @@ class Startup_InitiativeType(DjangoObjectType):
         fields = "__all__"
 
 
-class CategoryType(DjangoObjectType):
+class TagType(DjangoObjectType):
     class Meta:
-        model = Category
+        model = Tag
         fields = "__all__"
 
 
@@ -83,29 +76,25 @@ class CollaborationType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    eventtypes = graphene.List(EventTypeObjectType)
+    allsectionstypes = graphene.List(AllSectionsType)
     events = graphene.List(EventObjectType)
     latestupdates = graphene.List(UpdateType)
-    documents = graphene.List(DocumentsType)
     videos = graphene.List(VideosType)
     startups = graphene.List(Startup_InitiativeType)
-    categories = graphene.List(CategoryType)
+    categories = graphene.List(TagType)
     people = graphene.List(PeopleType)
     links = graphene.List(LinksType)
     internships = graphene.List(InternshipsType)
     collaboration = graphene.List(CollaborationType)
 
-    def resolve_eventtypes(root, info, **kwargs):
-        return EventType.objects.all()
+    def resolve_allsectionstypes(root, info, **kwargs):
+        return AllSections.objects.all()
 
     def resolve_events(root, info, **kwargs):
         return Event.objects.all()
 
     def resolve_latestupdates(root, info, **kwargs):
         return Update.objects.all()
-
-    def resolve_documents(root, info, **kwargs):
-        return Documents.objects.all()
 
     def resolve_videos(root, info, **kwargs):
         return Videos.objects.all()
@@ -114,7 +103,7 @@ class Query(graphene.ObjectType):
         return Startup_Initiative.objects.all()
 
     def resolve_categories(root, info, **kwargs):
-        return Category.objects.all()
+        return Tag.objects.all()
 
     def resolve_people(root, info, **kwargs):
         return People.objects.all()

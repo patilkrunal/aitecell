@@ -120,3 +120,25 @@
     5. apply link
     6. deadline
 </details>
+
+
+
+
+## Todo
+# backend
+- [x] create tags model - newsletter, social media, events, meet, documents, images, 
+- [x] add tag to each link (allow only one tag per link)
+- [X] create a flag model // can create flags to turn feature on and off
+- [X] rename category model to tag model
+- [X] other info - motto, vision, mission, etc
+- [X] latest updates new badge to be shown on only updates which are added in last 7 days and to 3 recent updates
+- [X] is active internship logic
+- [ ] add highlight news or any major event just below the latest updates and links section (create event insance for this and for newsletter as well)
+- [ ] add a section for policy and rules
+
+# frontend
+- [ ] add .env for links, videosection - referrer link of frontend hosting
+- [ ] pagination for events
+- [ ] add descriiption to event types, add quotation in event types
+- [ ] scroll up button, link to copyright ecell name
+- [ ] revamp teamp section with past batch as well

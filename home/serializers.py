@@ -1,19 +1,28 @@
-from abc import ABC
-
 from rest_framework import serializers
 from .models import (
-    EventType,
+    AllSections,
+    Tag,
     Event,
     Update,
-    Documents,
     Videos,
     Startup_Initiative,
-    Category,
     People,
     Links,
     Internships,
     Collaboration,
 )
+
+
+class AllSectionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AllSections
+        fields = "__all__"
+
+
+class TagsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = "__all__"
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -24,23 +33,9 @@ class EventSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class EventTypeSerializer(serializers.ModelSerializer):
-    events = EventSerializer(many=True)
-
-    class Meta:
-        model = EventType
-        fields = "__all__"
-
-
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Update
-        fields = "__all__"
-
-
-class DocumentsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Documents
         fields = "__all__"
 
 
@@ -53,12 +48,6 @@ class VideosSerializer(serializers.ModelSerializer):
 class StartupInitiativeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Startup_Initiative
-        fields = "__all__"
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
         fields = "__all__"
 
 
