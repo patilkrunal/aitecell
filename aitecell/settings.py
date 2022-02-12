@@ -6,15 +6,17 @@ from pathlib import Path
 load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "secret")
-DEBUG = True
 
-ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost", "aitecell.herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "aitecell.herokuapp.com"]
+
+DEBUG = os.getenv("DEBUG") == "True"
 
 # Application definition
 INSTALLED_APPS = [
+    "ckeditor",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -24,12 +26,26 @@ INSTALLED_APPS = [
     # 3rd party apps
     "rest_framework",
     "corsheaders",
-    "ckeditor",
     "django_graphiql",  # -> For GUI interface
     "graphene_django",  # -> For graphql api
     # Local Apps
     "home",
 ]
+
+if DEBUG == True:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }
+else:
+    DATABASES = {
+        "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
+    }
+
+print('database', DATABASES)
+
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -44,8 +60,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "aitecell.urls"
-
-DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
 
 TEMPLATES = [
     {
