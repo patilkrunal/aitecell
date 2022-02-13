@@ -133,8 +133,7 @@
 - [X] other info - motto, vision, mission, etc
 - [X] latest updates new badge to be shown on only updates which are added in last 7 days and to 3 recent updates
 - [X] is active internship logic
-- [ ] add highlight news or any major event just below the latest updates and links section (create event insance for this and for newsletter as well)
-- [ ] add a section for policy and rules
+- [X] add a section for policy and rules
 
 # frontend
 - [ ] add .env for links, videosection - referrer link of frontend hosting
@@ -142,3 +141,4 @@
 - [ ] add descriiption to event types, add quotation in event types
 - [ ] scroll up button, link to copyright ecell name
 - [ ] revamp teamp section with past batch as well
+- [ ] add a section for headlines to be displayed below the latest updates (create event insance for this and for newsletter as well).

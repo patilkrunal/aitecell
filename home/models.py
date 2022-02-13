@@ -73,7 +73,7 @@ class Event(models.Model):
     end_date        = models.DateTimeField(blank=True, null=True)
     image_url       = models.URLField(blank=True)
     meet_url        = models.URLField(blank=True)
-    event_type      = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, related_name="events")
+    event_type      = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, related_name="events", default=None)
     tags            = models.ManyToManyField(Tag, related_name='event', default=None)
     documents_links = models.ManyToManyField(Links, related_name='event', default=None)
     others          = models.TextField(blank=True)
@@ -130,14 +130,12 @@ class Startup_Initiative(models.Model):
     def __str__(self):
         return self.title
 
-
-def max_value_current_year(value):
-    return MaxValueValidator(current_year())(value) + 3
-
-
 def current_year():
     return datetime.date.today().year
 
+
+def max_value_current_year(value):
+    return MaxValueValidator(current_year()+4)(value)
 
 class People(models.Model):
     name            = models.CharField(max_length=100)
@@ -148,9 +146,8 @@ class People(models.Model):
     instagram       = models.URLField(blank=True)
     tags            = models.ManyToManyField(Tag, related_name='people', default=None)
     is_active       = models.BooleanField(default=True)
-    batch           = models.PositiveIntegerField(_("year"), blank=True, null=True,
-                        validators=[MinValueValidator(1950), max_value_current_year],
-                    )
+    batch           = models.PositiveIntegerField(_("year"), null=True, blank=True, 
+                        validators=[MinValueValidator(1998), max_value_current_year])
 
     def __str__(self):
         return self.name
@@ -185,9 +182,12 @@ class Collaboration(models.Model):
         return self.title
 
 class OtherDetails(models.Model):
-    motto   = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
-    vision  = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
-    mission = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
+    motto       = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
+    vision      = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
+    mission     = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
+    policy      = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
+    Rules       = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
+    about_us    = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
 
     def __str__(self):
         return self.motto

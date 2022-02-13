@@ -12,6 +12,7 @@ from .models import (
     Links,
     Internships,
     Collaboration,
+    OtherDetails
 )
 
 
@@ -75,17 +76,24 @@ class CollaborationType(DjangoObjectType):
         fields = "__all__"
 
 
+class OtherDetailsType(DjangoObjectType):
+    class Meta:
+        model = OtherDetails
+        fields = "__all__"
+
+
 class Query(graphene.ObjectType):
     allsectionstypes = graphene.List(AllSectionsType)
     events = graphene.List(EventObjectType)
     latestupdates = graphene.List(UpdateType)
     videos = graphene.List(VideosType)
     startups = graphene.List(Startup_InitiativeType)
-    categories = graphene.List(TagType)
+    tags = graphene.List(TagType)
     people = graphene.List(PeopleType)
     links = graphene.List(LinksType)
     internships = graphene.List(InternshipsType)
     collaboration = graphene.List(CollaborationType)
+    otherdetails = graphene.List(OtherDetailsType)
 
     def resolve_allsectionstypes(root, info, **kwargs):
         return AllSections.objects.all()
@@ -102,7 +110,7 @@ class Query(graphene.ObjectType):
     def resolve_startups(root, info, **kwargs):
         return Startup_Initiative.objects.all()
 
-    def resolve_categories(root, info, **kwargs):
+    def resolve_tags(root, info, **kwargs):
         return Tag.objects.all()
 
     def resolve_people(root, info, **kwargs):
@@ -116,6 +124,9 @@ class Query(graphene.ObjectType):
 
     def resolve_collaboration(root, info, **kwargs):
         return Collaboration.objects.all()
+
+    def resolve_otherdetails(root, info, **kwargs):
+        return OtherDetails.objects.all()
 
 
 schema = graphene.Schema(query=Query)
