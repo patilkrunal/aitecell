@@ -56,7 +56,7 @@ class Links(models.Model):
     title       = models.CharField(max_length=100)
     link        = models.URLField()
     description = models.TextField(blank=True)
-    tag         = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, related_name="links")
+    tag         = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, related_name="links", null=True, blank=True)
     logo_url    = models.URLField(blank=True)
 
     class Meta:
@@ -73,9 +73,9 @@ class Event(models.Model):
     end_date        = models.DateTimeField(blank=True, null=True)
     image_url       = models.URLField(blank=True)
     meet_url        = models.URLField(blank=True)
-    event_type      = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, related_name="events", default=None)
-    tags            = models.ManyToManyField(Tag, related_name='event', default=None)
-    documents_links = models.ManyToManyField(Links, related_name='event', default=None)
+    event_type      = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, related_name="events", null=True, blank=True)
+    tags            = models.ManyToManyField(Tag, related_name='event', null=True, blank=True)
+    documents_links = models.ManyToManyField(Links, related_name='event', null=True, blank=True)
     others          = models.TextField(blank=True)
     comments        = models.TextField(blank=True)
 
