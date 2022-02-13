@@ -11,11 +11,11 @@
 
 
 ## db.sqlite3 admin config
-username: `admin`
+username: `admin`  
 password: `admin`
 
 ## Endpoints
-`https://aitecell.herokuapp.com/api/`
+https://aitecell.herokuapp.com/api/
 
 ## Todo
 - [x] create tags model - newsletter, social media, events, meet, documents, images, 
