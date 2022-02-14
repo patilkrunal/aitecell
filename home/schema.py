@@ -85,11 +85,18 @@ class OtherDetailsType(DjangoObjectType):
 class Query(graphene.ObjectType):
     allsectionstypes = graphene.List(AllSectionsType)
     events = graphene.List(EventObjectType)
+    visits = graphene.List(EventObjectType)
+    sessions = graphene.List(EventObjectType)
+    trainings = graphene.List(EventObjectType)
     latestupdates = graphene.List(UpdateType)
     videos = graphene.List(VideosType)
     startups = graphene.List(Startup_InitiativeType)
     tags = graphene.List(TagType)
     people = graphene.List(PeopleType)
+    teamMembers = graphene.List(PeopleType)
+    alumniEntrepreneurs = graphene.List(PeopleType)
+    industrialMentors = graphene.List(PeopleType)
+    facultyMentors = graphene.List(PeopleType)
     links = graphene.List(LinksType)
     internships = graphene.List(InternshipsType)
     collaboration = graphene.List(CollaborationType)
@@ -99,10 +106,19 @@ class Query(graphene.ObjectType):
         return AllSections.objects.all()
 
     def resolve_events(root, info, **kwargs):
-        return Event.objects.all()
+        return Event.events.all()
+
+    def resolve_visits(root, info, **kwargs):
+        return Event.visits.all()
+
+    def resolve_sessions(root, info, **kwargs):
+        return Event.sessions.all()
+
+    def resolve_trainings(root, info, **kwargs):
+        return Event.trainings.all()
 
     def resolve_latestupdates(root, info, **kwargs):
-        return Update.objects.all()
+        return Update.active_objects.all()
 
     def resolve_videos(root, info, **kwargs):
         return Videos.objects.all()
@@ -115,6 +131,18 @@ class Query(graphene.ObjectType):
 
     def resolve_people(root, info, **kwargs):
         return People.objects.all()
+
+    def resolve_teamMembers(root, info, **kwargs):
+        return People.team_members.all()
+
+    def resolve_alumniEntrepreneurs(root, info, **kwargs):
+        return People.alumni_entrepreneurs.all()
+
+    def resolve_industrialMentors(root, info, **kwargs):
+        return People.industrial_mentors.all()
+
+    def resolve_facultyMentors(root, info, **kwargs):
+        return People.faculty_mentors.all()
 
     def resolve_links(root, info, **kwargs):
         return Links.objects.all()
