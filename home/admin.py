@@ -3,9 +3,9 @@ from .models import (
     AllSections,
     Tag,
     Event,
-    Update,
+    Headline,
     Videos,
-    Startup_Initiative,
+    StartupInitiative,
     People,
     Links,
     Internships,
@@ -17,9 +17,9 @@ from .models import (
 admin.site.register(AllSections)
 admin.site.register(Tag)
 admin.site.register(Event)
-admin.site.register(Update)
+admin.site.register(Headline)
 admin.site.register(Videos)
-admin.site.register(Startup_Initiative)
+admin.site.register(StartupInitiative)
 admin.site.register(People)
 admin.site.register(Links)
 admin.site.register(Internships)

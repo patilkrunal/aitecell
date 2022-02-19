@@ -9,9 +9,9 @@ import datetime
 
 from .models import (
     Event,
-    Update,
+    Headline,
     Videos,
-    Startup_Initiative,
+    StartupInitiative,
     People,
     Links,
     Internships,
@@ -81,7 +81,7 @@ class UpdateViewSet(viewsets.ModelViewSet):
     API endpoint that allows Projects to be created, viewed or modified.
     """
 
-    queryset = Update.objects.all()
+    queryset = Headline.objects.all()
     serializer_class = UpdateSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -101,7 +101,7 @@ class StartupInitiativeViewSet(viewsets.ModelViewSet):
     API endpoint that allows Skills to be created, viewed or modified.
     """
 
-    queryset = Startup_Initiative.objects.all()
+    queryset = StartupInitiative.objects.all()
     serializer_class = StartupInitiativeSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

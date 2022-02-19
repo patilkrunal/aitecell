@@ -5,9 +5,9 @@ from .models import (
     AllSections,
     Tag,
     Event,
-    Update,
+    Headline,
     Videos,
-    Startup_Initiative,
+    StartupInitiative,
     People,
     Links,
     Internships,
@@ -28,9 +28,9 @@ class EventObjectType(DjangoObjectType):
         fields = "__all__"
 
 
-class UpdateType(DjangoObjectType):
+class HeadlineType(DjangoObjectType):
     class Meta:
-        model = Update
+        model = Headline
         fields = "__all__"
 
 
@@ -42,7 +42,7 @@ class VideosType(DjangoObjectType):
 
 class Startup_InitiativeType(DjangoObjectType):
     class Meta:
-        model = Startup_Initiative
+        model = StartupInitiative
         fields = "__all__"
 
 
@@ -88,7 +88,7 @@ class Query(graphene.ObjectType):
     visits = graphene.List(EventObjectType)
     sessions = graphene.List(EventObjectType)
     trainings = graphene.List(EventObjectType)
-    latestupdates = graphene.List(UpdateType)
+    latestheadlines = graphene.List(HeadlineType)
     videos = graphene.List(VideosType)
     startups = graphene.List(Startup_InitiativeType)
     tags = graphene.List(TagType)
@@ -117,14 +117,14 @@ class Query(graphene.ObjectType):
     def resolve_trainings(root, info, **kwargs):
         return Event.trainings.all()
 
-    def resolve_latestupdates(root, info, **kwargs):
-        return Update.active_objects.all()
+    def resolve_latestheadlines(root, info, **kwargs):
+        return Headline.active_objects.all()
 
     def resolve_videos(root, info, **kwargs):
         return Videos.objects.all()
 
     def resolve_startups(root, info, **kwargs):
-        return Startup_Initiative.objects.all()
+        return StartupInitiative.objects.all()
 
     def resolve_tags(root, info, **kwargs):
         return Tag.objects.all()

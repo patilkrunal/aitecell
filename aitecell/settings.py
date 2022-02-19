@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "graphene_django",  # -> For graphql api
     # Local Apps
     "home",
+    "blog",
 ]
 
 if DEBUG == True:

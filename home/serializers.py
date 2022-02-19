@@ -3,9 +3,9 @@ from .models import (
     AllSections,
     Tag,
     Event,
-    Update,
+    Headline,
     Videos,
-    Startup_Initiative,
+    StartupInitiative,
     People,
     Links,
     Internships,
@@ -35,7 +35,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Update
+        model = Headline
         fields = "__all__"
 
 
@@ -47,7 +47,7 @@ class VideosSerializer(serializers.ModelSerializer):
 
 class StartupInitiativeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Startup_Initiative
+        model = StartupInitiative
         fields = "__all__"
 
 

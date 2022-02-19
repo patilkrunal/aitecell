@@ -6,7 +6,6 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.apps import apps
 from django.db.models import Q
 
 
@@ -81,12 +80,14 @@ class Visits(models.Manager):
 
 class Sessions(models.Manager):
     def get_queryset(self):
-        return super(Sessions, self).get_queryset().filter(event_type__title="eventtype_session").order_by('-start_date')
+        return super(Sessions, self).get_queryset().filter(event_type__title="eventtype_session").order_by(
+            '-start_date')
 
 
 class Trainings(models.Manager):
     def get_queryset(self):
-        return super(Trainings, self).get_queryset().filter(event_type__title="eventtype_training").order_by('-start_date')
+        return super(Trainings, self).get_queryset().filter(event_type__title="eventtype_training").order_by(
+            '-start_date')
 
 
 class Event(models.Model):
@@ -122,19 +123,22 @@ class Event(models.Model):
         return self.title
 
 
-class UpdateManager(models.Manager):
+class HeadlineManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(start_date__gte=(timezone.now() - datetime.timedelta(days=7))) | super().get_queryset().order_by('-id')[:3]
+        return super().get_queryset().filter(
+            start_date__gte=(timezone.now() - datetime.timedelta(days=7))) | super().get_queryset().order_by('-id')[:3]
 
 
-class Update(models.Model):
+class Headline(models.Model):
     title = models.CharField(max_length=100)
+    description = RichTextField(config_name="awesome_ckeditor", null=True, blank=True)
+    image_url = models.URLField(blank=True)
     link = models.URLField(blank=True)
-    start_date = models.DateTimeField(default=timezone.now)
+    start_date = models.DateTimeField(default=timezone.now, blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
 
     objects = models.Manager()
-    active_objects = UpdateManager()
+    active_objects = HeadlineManager()
 
     def __str__(self):
         return self.title
@@ -149,7 +153,7 @@ class Videos(models.Model):
         return self.title
 
 
-class Startup_Initiative(models.Model):
+class StartupInitiative(models.Model):
     title = models.CharField(max_length=100)
     description = RichTextField(
         config_name="awesome_ckeditor", null=True, blank=True)
@@ -166,7 +170,7 @@ def current_year():
 
 
 def max_value_current_year(value):
-    return MaxValueValidator(current_year()+4)(value)
+    return MaxValueValidator(current_year() + 4)(value)
 
 
 class TeamMember(models.Manager):

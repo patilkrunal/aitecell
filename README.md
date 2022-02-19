@@ -28,4 +28,4 @@ https://aitecell.herokuapp.com/api/
 - [X] add a section for policy and rules
 
 ## Frontend link
-https://ait-ecell.netlify.app
+https://aitecell.netlify.app
