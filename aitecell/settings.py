@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_graphiql",  # -> For GUI interface
     "graphene_django",  # -> For graphql api
+    "embargoed",  # -> For embargoed content blocking all Russian requests on the site
     # Local Apps
     "home",
     "blog",
@@ -41,14 +42,13 @@ if DEBUG == True:
         }
     }
 else:
-    DATABASES = {
-        "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
-    }
+    DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
 
-print('database', DATABASES)
+print("database", DATABASES)
 
 
 MIDDLEWARE = [
+    "embargoed.middleware.EmbargoedMiddlewareTemplate",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
