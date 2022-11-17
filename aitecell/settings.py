@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "secret")
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "aitecell.herokuapp.com"]
 
-DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = "True"
 
 # Application definition
 INSTALLED_APPS = [
@@ -33,18 +33,12 @@ INSTALLED_APPS = [
     "home",
     "blog",
 ]
-
-if DEBUG == True:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
-else:
-    DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
-
-print("database", DATABASES)
+}
 
 
 MIDDLEWARE = [
