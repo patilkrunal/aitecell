@@ -5,7 +5,7 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
+    atomic = False
     dependencies = [
         ('home', '0010_auto_20220212_2119'),
     ]

@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
+    atomic = False
     dependencies = [
         ('home', '0007_auto_20220212_2026'),
     ]

@@ -5,7 +5,7 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
+    atomic = False
     dependencies = [
         ('home', '0004_tag'),
     ]
@@ -14,12 +14,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='tags',
-            field=models.ManyToManyField(default=None, related_name='event', to='home.Tag'),
+            field=models.ManyToManyField(
+                default=None, related_name='event', to='home.Tag'),
         ),
         migrations.AddField(
             model_name='links',
             name='tag',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.DO_NOTHING, related_name='links', to='home.Tag'),
+            field=models.ForeignKey(
+                default=None, on_delete=django.db.models.deletion.DO_NOTHING, related_name='links', to='home.Tag'),
             preserve_default=False,
         ),
     ]

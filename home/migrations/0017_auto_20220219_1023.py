@@ -5,7 +5,7 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
+    atomic = False
     dependencies = [
         ('home', '0016_auto_20220214_1752'),
     ]

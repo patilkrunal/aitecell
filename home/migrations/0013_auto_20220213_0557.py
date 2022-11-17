@@ -7,7 +7,7 @@ import home.models
 
 
 class Migration(migrations.Migration):
-
+    atomic = False
     dependencies = [
         ('home', '0012_auto_20220213_0551'),
     ]
